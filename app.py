@@ -61,12 +61,18 @@ def message_start(message):
                     'user_name': message.contact.first_name,
                     'call': id
                 }
+
                 if mailing.send_mail(data=data):
                     bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
                     bot.send_message(message.chat.id, 'Ваша заявка успешно отправлена!',
                                      reply_markup=keyb.hello_keyboard())
                 else:
-                    bot.send_message(message.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
+                    bot.send_photo(message.chat.id, get("hhttps://vetliva.ru/upload/iblock/c57/c57d489ec51709bbd60722877685e058.jpg").content)
+                    bot.send_message(message.chat.id, 'Упс, что-то пошло не так!\n Но скоро мы все исправим!\n\n'
+                                                      'Вы можете позвонить нам или написать на почту:'
+                                                      '\U0001F4E7 *_viksne@divier.ru_*'
+                                                      '\U0000260E *_8(499)1106264_*'
+                                                      '\U0001F4DE *_8(905)5463988_*', reply_markup=keyb.hello_keyboard(), parse_mode='Markdown')
 
         elif call.data == 'to_lvl2':
             bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
