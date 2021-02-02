@@ -1,0 +1,5 @@
+TOKEN = ''
+
+HOST = ''
+EMAIL = ''
+PASSW = ''
