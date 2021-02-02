@@ -2,6 +2,8 @@ import smtplib, ssl
 from loguru import logger
 import settings
 
+from datetime import datetime
+
 logger.add("log/log.json", level="DEBUG", format="{time} {level} {message}", serialize=True,
            rotation="1 MB", compression="zip")
 
@@ -42,6 +44,33 @@ def send_mail(data, text=None):
             str(data['user_name']),
             text
         )
+
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+        server.login(sender_email, password)
+        server.sendmail(sender_email, receiver_email, message.encode('utf-8'))
+
+    return True
+
+
+@logger.catch()
+def send_error():
+    port = 465  # For SSL
+    smtp_server = "smtp.gmail.com"
+    sender_email = settings.EMAIL  # Enter your address
+    receiver_email = settings.EMAIL  # Enter receiver address
+    password = settings.PASSW
+
+    now = datetime.now()
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+
+    message = """
+    Subject: ERROR'
+    
+    Время: {}
+    check log/logger.json""".format(
+        dt_string,
+    )
 
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
