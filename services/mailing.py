@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import smtplib, ssl
 from loguru import logger
 import settings
@@ -18,7 +20,7 @@ def send_mail(data, text=None):
     """
 
     port = 465  # For SSL
-    smtp_server = "smtp.gmail.com"
+    smtp_server = settings.HOST
     sender_email = settings.EMAIL  # Enter your address
     receiver_email = settings.EMAIL  # Enter receiver address
     password = settings.PASSW
@@ -56,7 +58,7 @@ def send_mail(data, text=None):
 @logger.catch()
 def send_error():
     port = 465  # For SSL
-    smtp_server = "smtp.gmail.com"
+    smtp_server = settings.HOST
     sender_email = settings.EMAIL  # Enter your address
     receiver_email = settings.EMAIL  # Enter receiver address
     password = settings.PASSW
