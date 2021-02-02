@@ -57,26 +57,28 @@ def handle_query(call):
 
         @bot.message_handler(content_types=['contact'])
         def contact(call):
+
             id = 'Форма из стартового меню'
             data = {
-                'phone': call.message.contact.phone_number,
-                'user_name': call.message.contact.first_name,
+                'phone': call.contact.phone_number,
+                'user_name': call.contact.first_name,
                 'call': id
             }
 
             if mailing.send_mail(data=data):
-                bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!',
+                bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!',
                                  reply_markup=keyb.hello_keyboard())
+                # trouble !
+                # bot.answer_callback_query(call.id-1, show_alert=True, text="Ваша заявка успешно отправлена!")
             else:
                 with open('services/error.jpg', 'rb') as file:
                     img = file.read()
-                bot.send_photo(call.message.chat.id, photo=img)
-                bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!\nНо скоро мы все исправим!\n\n'
-                                                  'Вы можете позвонить нам или написать на почту:\n'
-                                                  '\U0001F4E7 viksne@divier.ru\n'
-                                                  '\U0000260E 8(499)1106264\n'
-                                                  '\U0001F4DE 8(905)5463988\n', reply_markup=keyb.hello_keyboard(), parse_mode='Markdown')
+                bot.send_photo(call.chat.id, photo=img)
+                bot.send_message(call.chat.id, 'Упс, что-то пошло не так!\nНо скоро мы все исправим!\n\n'
+                                                       'Вы можете позвонить нам или написать на почту:\n'
+                                                       '\U0001F4E7 viksne@divier.ru\n'
+                                                       '\U0000260E 8(499)1106264\n'
+                                                       '\U0001F4DE 8(905)5463988\n', reply_markup=keyb.hello_keyboard(), parse_mode='Markdown')
 
 
     elif call.data == 'to_lvl2':
@@ -150,24 +152,26 @@ def handle_query(call):
 
         @bot.message_handler(content_types=['text'])
         def await_text(call):
-            a = call.message.text
+            a = call.text
 
             @bot.message_handler(content_types=['contact'])
             def contact(call):
                 id = 'Под ключ -> Мобильное приложение'
                 data = {
-                    'phone': call.message.contact.phone_number,
-                    'user_name': call.message.contact.first_name,
+                    'phone': call.contact.phone_number,
+                    'user_name': call.contact.first_name,
                     'call': id
                 }
                 if mailing.send_mail(data=data, text=a):
-                    bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                    bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!\n '
+                    # bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
+                    bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!\n '
                                                       'Мы обязательно с Вами свяжемся в ближайшее время!',
                                      reply_markup=keyb.hello_keyboard())
                 else:
-                    bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!',
+                    bot.send_message(call.chat.id, 'Упс, что-то пошло не так!',
                                      reply_markup=keyb.hello_keyboard())
+
+########################### КАНОН ВЫШЕ №№№№№№№№№№№№№№
 
     # level 3 - from on_key - all
     elif call.data == 'all':
