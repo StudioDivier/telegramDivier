@@ -80,7 +80,6 @@ def handle_query(call):
                                                        '\U0000260E 8(499)1106264\n'
                                                        '\U0001F4DE 8(905)5463988\n', reply_markup=keyb.hello_keyboard(), parse_mode='Markdown')
 
-
     elif call.data == 'to_lvl2':
         bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                               text='Мы предлагаем уважаемым заказчикам подготовку и размещение в Сети маркетингового '
@@ -171,8 +170,6 @@ def handle_query(call):
                     bot.send_message(call.chat.id, 'Упс, что-то пошло не так!',
                                      reply_markup=keyb.hello_keyboard())
 
-########################### КАНОН ВЫШЕ №№№№№№№№№№№№№№
-
     # level 3 - from on_key - all
     elif call.data == 'all':
         bot.send_message(call.message.chat.id, 'Опишите свой проект в двух словах')
@@ -181,23 +178,23 @@ def handle_query(call):
 
         @bot.message_handler(content_types=['text'])
         def await_text(call):
-            a = call.message.text
+            a = call.text
 
             @bot.message_handler(content_types=['contact'])
             def contact(call):
                 id = 'Под ключ -> И то и то'
                 data = {
-                    'phone': call.message.contact.phone_number,
-                    'user_name': call.message.contact.first_name,
+                    'phone': call.contact.phone_number,
+                    'user_name': call.contact.first_name,
                     'call': id
                 }
                 if mailing.send_mail(data=data, text=a):
-                    bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                    bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!\n'
+                    # bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
+                    bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!\n'
                                                       'Мы обязательно с Вами свяжемся в ближайшее время!',
                                      reply_markup=keyb.hello_keyboard())
                 else:
-                    bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!',
+                    bot.send_message(call.chat.id, 'Упс, что-то пошло не так!',
                                      reply_markup=keyb.hello_keyboard())
 
     ###################
@@ -212,17 +209,17 @@ def handle_query(call):
         def contact(call):
             id = 'Дизайн -> Новый дизайн'
             data = {
-                'phone': call.message.contact.phone_number,
-                'user_name': call.message.contact.first_name,
+                'phone': call.contact.phone_number,
+                'user_name': call.contact.first_name,
                 'call': id
             }
             if mailing.send_mail(data=data):
-                bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!\n'
+                # bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
+                bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!\n'
                                                   'Мы обязательно с Вами свяжемся в ближайшее время!',
                                  reply_markup=keyb.hello_keyboard())
             else:
-                bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
+                bot.send_message(call.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
 
     # level 3 - from design/redesign - old design
     elif call.data == 'old_design':
@@ -233,17 +230,17 @@ def handle_query(call):
         def contact(call):
             id = 'Дизайн -> Доработка дизайна текущего'
             data = {
-                'phone': call.message.contact.phone_number,
-                'user_name': call.message.contact.first_name,
+                'phone': call.contact.phone_number,
+                'user_name': call.contact.first_name,
                 'call': id
             }
             if mailing.send_mail(data=data):
-                bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!\n'
+                # bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
+                bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!\n'
                                                   'Мы обязательно с Вами свяжемся в ближайшее время!',
                                  reply_markup=keyb.hello_keyboard())
             else:
-                bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
+                bot.send_message(call.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
 
     # level 3 - from design/redesign - consultation
     elif call.data == 'cons12':
@@ -254,17 +251,17 @@ def handle_query(call):
         def contact(call):
             id = 'Дизайн -> Консультация'
             data = {
-                'phone': call.message.contact.phone_number,
-                'user_name': call.message.contact.first_name,
+                'phone': call.contact.phone_number,
+                'user_name': call.contact.first_name,
                 'call': id
             }
             if mailing.send_mail(data=data):
-                bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!\n'
+                # bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
+                bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!\n'
                                                   'Мы обязательно с Вами свяжемся в ближайшее время!',
                                  reply_markup=keyb.hello_keyboard())
             else:
-                bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
+                bot.send_message(call.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
 
     ###################
     #
@@ -278,17 +275,17 @@ def handle_query(call):
         def contact(call):
             id = 'Доработка/Поддержка -> Разовые доработки'
             data = {
-                'phone': call.message.contact.phone_number,
-                'user_name': call.message.contact.first_name,
+                'phone': call.contact.phone_number,
+                'user_name': call.contact.first_name,
                 'call': id
             }
             if mailing.send_mail(data=data):
-                bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!\n'
+                # bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
+                bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!\n'
                                                   'Мы обязательно с Вами свяжемся в ближайшее время!',
                                  reply_markup=keyb.hello_keyboard())
             else:
-                bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
+                bot.send_message(call.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
 
     # level 3 - from support - tech_support
     elif call.data == 'tech_support':
@@ -299,17 +296,17 @@ def handle_query(call):
         def contact(call):
             id = 'Доработка/Поддержка -> Тех.поддержка'
             data = {
-                'phone': call.message.contact.phone_number,
-                'user_name': call.message.contact.first_name,
+                'phone': call.contact.phone_number,
+                'user_name': call.contact.first_name,
                 'call': id
             }
             if mailing.send_mail(data=data):
-                bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!\n'
+                # bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
+                bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!\n'
                                                   'Мы обязательно с Вами свяжемся в ближайшее время!',
                                  reply_markup=keyb.hello_keyboard())
             else:
-                bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!',
+                bot.send_message(call.chat.id, 'Упс, что-то пошло не так!',
                                  reply_markup=keyb.hello_keyboard())
 
     # level 3 - from support - integration
@@ -321,17 +318,17 @@ def handle_query(call):
         def contact(call):
             id = 'Доработка/Поддержка -> Интеграция 1С'
             data = {
-                'phone': call.message.contact.phone_number,
-                'user_name': call.message.contact.first_name,
+                'phone': call.contact.phone_number,
+                'user_name': call.contact.first_name,
                 'call': id
             }
             if mailing.send_mail(data=data):
-                bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!\n'
+                # bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
+                bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!\n'
                                                   'Мы обязательно с Вами свяжемся в ближайшее время!',
                                  reply_markup=keyb.hello_keyboard())
             else:
-                bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!',
+                bot.send_message(call.chat.id, 'Упс, что-то пошло не так!',
                                  reply_markup=keyb.hello_keyboard())
 
     # level 3 - from support - payment
@@ -343,17 +340,17 @@ def handle_query(call):
         def contact(call):
             id = 'Доработка/Поддержка -> Платежные системы'
             data = {
-                'phone': call.message.contact.phone_number,
-                'user_name': call.message.contact.first_name,
+                'phone': call.contact.phone_number,
+                'user_name': call.contact.first_name,
                 'call': id
             }
             if mailing.send_mail(data=data):
-                bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!\n'
+                # bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
+                bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!\n'
                                                   'Мы обязательно с Вами свяжемся в ближайшее время!',
                                  reply_markup=keyb.hello_keyboard())
             else:
-                bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!',
+                bot.send_message(call.chat.id, 'Упс, что-то пошло не так!',
                                  reply_markup=keyb.hello_keyboard())
 
     # level 3 - from support - cons13
@@ -365,17 +362,17 @@ def handle_query(call):
         def contact(call):
             id = 'Доработка/Поддержка -> Консультация'
             data = {
-                'phone': call.message.contact.phone_number,
-                'user_name': call.message.contact.first_name,
+                'phone': call.contact.phone_number,
+                'user_name': call.contact.first_name,
                 'call': id
             }
             if mailing.send_mail(data=data):
-                bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!\n'
+                # bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
+                bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!\n'
                                                   'Мы обязательно с Вами свяжемся в ближайшее время!',
                                  reply_markup=keyb.hello_keyboard())
             else:
-                bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!',
+                bot.send_message(call.chat.id, 'Упс, что-то пошло не так!',
                                  reply_markup=keyb.hello_keyboard())
 
     ###################
@@ -390,17 +387,17 @@ def handle_query(call):
         def contact(call):
             id = 'Продвижение/Продвижение -> Продвижение в поиске'
             data = {
-                'phone': call.message.contact.phone_number,
-                'user_name': call.message.contact.first_name,
+                'phone': call.contact.phone_number,
+                'user_name': call.contact.first_name,
                 'call': id
             }
             if mailing.send_mail(data=data):
-                bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!\n'
+                # bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
+                bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!\n'
                                                   'Мы обязательно с Вами свяжемся в ближайшее время!',
                                  reply_markup=keyb.hello_keyboard())
             else:
-                bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!',
+                bot.send_message(call.chat.id, 'Упс, что-то пошло не так!',
                                  reply_markup=keyb.hello_keyboard())
 
     # level 3 from optimization - seo
@@ -412,17 +409,17 @@ def handle_query(call):
         def contact(call):
             id = 'Продвижение/Продвижение -> Разовая SEO'
             data = {
-                'phone': call.message.contact.phone_number,
-                'user_name': call.message.contact.first_name,
+                'phone': call.contact.phone_number,
+                'user_name': call.contact.first_name,
                 'call': id
             }
             if mailing.send_mail(data=data):
-                bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!'
+                # bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
+                bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!'
                                                   '\nМы обязательно с Вами свяжемся в ближайшее время!',
                                  reply_markup=keyb.hello_keyboard())
             else:
-                bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!',
+                bot.send_message(call.chat.id, 'Упс, что-то пошло не так!',
                                  reply_markup=keyb.hello_keyboard())
 
     # level 3 from optimization - cons14
@@ -434,17 +431,17 @@ def handle_query(call):
         def contact(call):
             id = 'Продвижение/Продвижение -> Консультация'
             data = {
-                'phone': call.message.contact.phone_number,
-                'user_name': call.message.contact.first_name,
+                'phone': call.contact.phone_number,
+                'user_name': call.contact.first_name,
                 'call': id
             }
             if mailing.send_mail(data=data):
-                bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!'
+                # bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
+                bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!'
                                                   '\nМы обязательно с Вами свяжемся в ближайшее время!',
                                  reply_markup=keyb.hello_keyboard())
             else:
-                bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!',
+                bot.send_message(call.chat.id, 'Упс, что-то пошло не так!',
                                  reply_markup=keyb.hello_keyboard())
 
     ###################
@@ -459,17 +456,17 @@ def handle_query(call):
         def contact(call):
             id = 'Реклама -> Яндекс.Директ'
             data = {
-                'phone': call.message.contact.phone_number,
-                'user_name': call.message.contact.first_name,
+                'phone': call.contact.phone_number,
+                'user_name': call.contact.first_name,
                 'call': id
             }
             if mailing.send_mail(data=data):
-                bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!'
+                # bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
+                bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!'
                                                   '\nМы обязательно с Вами свяжемся в ближайшее время!',
                                  reply_markup=keyb.hello_keyboard())
             else:
-                bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
+                bot.send_message(call.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
 
     # level 3 - from adver - google
     elif call.data == 'google':
@@ -480,17 +477,17 @@ def handle_query(call):
         def contact(call):
             id = 'Реклама -> Google Ad'
             data = {
-                'phone': call.message.contact.phone_number,
-                'user_name': call.message.contact.first_name,
+                'phone': call.contact.phone_number,
+                'user_name': call.contact.first_name,
                 'call': id
             }
             if mailing.send_mail(data=data):
-                bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!'
+                # bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
+                bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!'
                                                   '\nМы обязательно с Вами свяжемся в ближайшее время!',
                                  reply_markup=keyb.hello_keyboard())
             else:
-                bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
+                bot.send_message(call.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
 
     # level 3 - from adver - smm
     elif call.data == 'smm':
@@ -501,17 +498,17 @@ def handle_query(call):
         def contact(call):
             id = 'Реклама -> SMM'
             data = {
-                'phone': call.message.contact.phone_number,
-                'user_name': call.message.contact.first_name,
+                'phone': call.contact.phone_number,
+                'user_name': call.contact.first_name,
                 'call': id
             }
             if mailing.send_mail(data=data):
-                bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!'
+                # bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
+                bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!'
                                                   '\nМы обязательно с Вами свяжемся в ближайшее время!',
                                  reply_markup=keyb.hello_keyboard())
             else:
-                bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
+                bot.send_message(call.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
 
     # level 3 - from adver - all15
     elif call.data == 'all15':
@@ -522,17 +519,17 @@ def handle_query(call):
         def contact(call):
             id = 'Реклама -> Нужно все'
             data = {
-                'phone': call.message.contact.phone_number,
-                'user_name': call.message.contact.first_name,
+                'phone': call.contact.phone_number,
+                'user_name': call.contact.first_name,
                 'call': id
             }
             if mailing.send_mail(data=data):
-                bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!'
+                # bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
+                bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!'
                                                   '\nМы обязательно с Вами свяжемся в ближайшее время!',
                                  reply_markup=keyb.hello_keyboard())
             else:
-                bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
+                bot.send_message(call.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
 
     # level 3 - from adver - cons15
     elif call.data == 'cons15':
@@ -543,17 +540,17 @@ def handle_query(call):
         def contact(call):
             id = 'Реклама -> Кнсультация'
             data = {
-                'phone': call.message.contact.phone_number,
-                'user_name': call.message.contact.first_name,
+                'phone': call.contact.phone_number,
+                'user_name': call.contact.first_name,
                 'call': id
             }
             if mailing.send_mail(data=data):
-                bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!'
+                # bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
+                bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!'
                                                   '\nМы обязательно с Вами свяжемся в ближайшее время!',
                                  reply_markup=keyb.hello_keyboard())
             else:
-                bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
+                bot.send_message(call.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
 
     ######################################
     #
@@ -566,23 +563,23 @@ def handle_query(call):
 
         @bot.message_handler(content_types=['text'])
         def await_text(call):
-            a = call.message.text
+            a = call.text
 
             @bot.message_handler(content_types=['contact'])
             def contact(call):
                 id = 'Под ключ -> Сайт -> Сайт компании'
                 data = {
-                    'phone': call.message.contact.phone_number,
-                    'user_name': call.message.contact.first_name,
+                    'phone': call.contact.phone_number,
+                    'user_name': call.contact.first_name,
                     'call': id
                 }
                 if mailing.send_mail(data=data, text=a):
-                    bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                    bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!'
+                    # bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
+                    bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!'
                                                       '\nМы обязательно с Вами свяжемся в ближайшее время!',
                                      reply_markup=keyb.hello_keyboard())
                 else:
-                    bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
+                    bot.send_message(call.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
 
     # level 4 - from site - eshop
     elif call.data == 'eshop':
@@ -592,23 +589,23 @@ def handle_query(call):
 
         @bot.message_handler(content_types=['text'])
         def await_text(call):
-            a = call.message.text
+            a = call.text
 
             @bot.message_handler(content_types=['contact'])
             def contact(call):
                 id = 'Под ключ -> Сайт -> Интернет магазин'
                 data = {
-                    'phone': call.message.contact.phone_number,
-                    'user_name': call.message.contact.first_name,
+                    'phone': call.contact.phone_number,
+                    'user_name': call.contact.first_name,
                     'call': id
                 }
                 if mailing.send_mail(data=data, text=a):
-                    bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                    bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!'
+                    # bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
+                    bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!'
                                                       '\nМы обязательно с Вами свяжемся в ближайшее время!',
                                      reply_markup=keyb.hello_keyboard())
                 else:
-                    bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
+                    bot.send_message(call.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
 
     # level 4 - from site - info
     elif call.data == 'info':
@@ -618,23 +615,23 @@ def handle_query(call):
 
         @bot.message_handler(content_types=['text'])
         def await_text(call):
-            a = call.message.text
+            a = call.text
 
             @bot.message_handler(content_types=['contact'])
             def contact(call):
                 id = 'Под ключ -> Сайт -> Информационный сайт'
                 data = {
-                    'phone': call.message.contact.phone_number,
-                    'user_name': call.message.contact.first_name,
+                    'phone': call.contact.phone_number,
+                    'user_name': call.contact.first_name,
                     'call': id
                 }
                 if mailing.send_mail(data=data, text=a):
-                    bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                    bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!\n'
+                    # bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
+                    bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!\n'
                                                       'Мы обязательно с Вами свяжемся в ближайшее время!',
                                      reply_markup=keyb.hello_keyboard())
                 else:
-                    bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
+                    bot.send_message(call.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
 
     # level 4 - from site - lending
     elif call.data == 'lending':
@@ -644,23 +641,23 @@ def handle_query(call):
 
         @bot.message_handler(content_types=['text'])
         def await_text(call):
-            a = call.message.text
+            a = call.text
 
             @bot.message_handler(content_types=['contact'])
             def contact(call):
                 id = 'Под ключ -> Сайт -> Лендинг'
                 data = {
-                    'phone': call.message.contact.phone_number,
-                    'user_name': call.message.contact.first_name,
+                    'phone': call.contact.phone_number,
+                    'user_name': call.contact.first_name,
                     'call': id
                 }
                 if mailing.send_mail(data=data, text=a):
-                    bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
-                    bot.send_message(call.message.chat.id, 'Ваша заявка успешно отправлена!\n'
+                    # bot.answer_callback_query(call.id, show_alert=True, text="Ваша заявка успешно отправлена!")
+                    bot.send_message(call.chat.id, 'Ваша заявка успешно отправлена!\n'
                                                       'Мы обязательно с Вами свяжемся в ближайшее время!',
                                      reply_markup=keyb.hello_keyboard())
                 else:
-                    bot.send_message(call.message.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
+                    bot.send_message(call.chat.id, 'Упс, что-то пошло не так!', reply_markup=keyb.hello_keyboard())
 
 
 if __name__ == '__main__':
